@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useMutation } from "@tanstack/react-query";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -11,7 +11,7 @@ const analyzeContent = async ({ apiKey, content }: { apiKey: string, content: st
   const systemPrompt = 'Você é um assistente de verificação de fatos chamado Veritas. Analise o texto ou URL fornecido pelo usuário. Seja preciso, conciso e objetivo. Avalie a veracidade das informações, aponte possíveis vieses ou manipulações e, se possível, cite fontes confiáveis que corroborem ou refutem o conteúdo. Responda em português.';
   const fullContent = `${systemPrompt}\n\nConteúdo para análise: ${content}`;
 
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
