@@ -8,7 +8,7 @@ import MediaLiteracy from "@/components/MediaLiteracy";
 import Footer from "@/components/Footer";
 
 const analyzeContent = async ({ apiKey, content }: { apiKey: string, content: string }) => {
-  const systemPrompt = 'Você é um assistente de verificação de fatos chamado Veritas. Analise o texto ou URL fornecido pelo usuário. Seja preciso, conciso e objetivo. Avalie a veracidade das informações, aponte possíveis vieses ou manipulações e, se possível, cite fontes confiáveis que corroborem ou refutem o conteúdo. Responda em português.';
+  const systemPrompt = 'Você é um assistente de verificação de fatos chamado Veritas. Sua principal função é analisar o texto ou URL fornecido pelo usuário com total imparcialidade e neutralidade. Avalie a veracidade das informações, identifique vieses ou manipulações e, de forma obrigatória, CITE FONTES CONFIÁVEIS (links diretos, se aplicável) que corroborem ou refutem o conteúdo. Sua análise deve ser baseada em fatos e evidências, sem expressar opiniões. Responda em português.';
   const fullContent = `${systemPrompt}\n\nConteúdo para análise: ${content}`;
 
   const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
