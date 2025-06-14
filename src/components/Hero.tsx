@@ -34,7 +34,7 @@ const Hero = ({ onAnalyze, isLoading }: HeroProps) => {
         <div className="flex flex-col sm:flex-row gap-4">
           <Input
             type="password"
-            placeholder="Sua chave de API da Perplexity AI"
+            placeholder="Sua chave de API do Google AI Studio"
             className="flex-grow text-base"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
@@ -45,8 +45,8 @@ const Hero = ({ onAnalyze, isLoading }: HeroProps) => {
           </Button>
         </div>
         <p className="text-xs text-muted-foreground">
-          Para usar a análise em tempo real, você precisa de uma chave da API da Perplexity.{" "}
-          <a href="https://www.perplexity.ai/settings/api" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+          Para usar a análise em tempo real, você precisa de uma chave da API do Google.{" "}
+          <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
             Obtenha sua chave aqui.
           </a>
         </p>
