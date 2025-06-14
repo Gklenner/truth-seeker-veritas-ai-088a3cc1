@@ -9,13 +9,259 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      articles: {
+        Row: {
+          author_id: string | null
+          confidence_score: number
+          content: string
+          created_at: string
+          featured_image: string | null
+          id: string
+          original_claim: string
+          published_at: string | null
+          share_count: number | null
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          verification_status: string
+          view_count: number | null
+        }
+        Insert: {
+          author_id?: string | null
+          confidence_score: number
+          content: string
+          created_at?: string
+          featured_image?: string | null
+          id?: string
+          original_claim: string
+          published_at?: string | null
+          share_count?: number | null
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          verification_status: string
+          view_count?: number | null
+        }
+        Update: {
+          author_id?: string | null
+          confidence_score?: number
+          content?: string
+          created_at?: string
+          featured_image?: string | null
+          id?: string
+          original_claim?: string
+          published_at?: string | null
+          share_count?: number | null
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          verification_status?: string
+          view_count?: number | null
+        }
+        Relationships: []
+      }
+      expert_validations: {
+        Row: {
+          article_id: string | null
+          comments: string | null
+          created_at: string
+          expert_id: string | null
+          id: string
+          validation_status: string | null
+        }
+        Insert: {
+          article_id?: string | null
+          comments?: string | null
+          created_at?: string
+          expert_id?: string | null
+          id?: string
+          validation_status?: string | null
+        }
+        Update: {
+          article_id?: string | null
+          comments?: string | null
+          created_at?: string
+          expert_id?: string | null
+          id?: string
+          validation_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expert_validations_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "expert_validations_expert_id_fkey"
+            columns: ["expert_id"]
+            isOneToOne: false
+            referencedRelation: "experts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      experts: {
+        Row: {
+          created_at: string
+          credentials: string | null
+          expertise_areas: string[]
+          id: string
+          name: string
+          reputation_score: number | null
+          user_id: string
+          verified_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          credentials?: string | null
+          expertise_areas: string[]
+          id?: string
+          name: string
+          reputation_score?: number | null
+          user_id: string
+          verified_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          credentials?: string | null
+          expertise_areas?: string[]
+          id?: string
+          name?: string
+          reputation_score?: number | null
+          user_id?: string
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
+      monitored_content: {
+        Row: {
+          content: string
+          detected_at: string
+          id: string
+          platform: string | null
+          priority_score: number | null
+          source_url: string | null
+          status: string | null
+          viral_potential: number | null
+        }
+        Insert: {
+          content: string
+          detected_at?: string
+          id?: string
+          platform?: string | null
+          priority_score?: number | null
+          source_url?: string | null
+          status?: string | null
+          viral_potential?: number | null
+        }
+        Update: {
+          content?: string
+          detected_at?: string
+          id?: string
+          platform?: string | null
+          priority_score?: number | null
+          source_url?: string | null
+          status?: string | null
+          viral_potential?: number | null
+        }
+        Relationships: []
+      }
+      research_analyses: {
+        Row: {
+          ai_analysis: string
+          article_id: string | null
+          created_at: string
+          id: string
+          original_content: string
+          processing_time: number | null
+          research_data: Json
+          sources_found: number | null
+        }
+        Insert: {
+          ai_analysis: string
+          article_id?: string | null
+          created_at?: string
+          id?: string
+          original_content: string
+          processing_time?: number | null
+          research_data: Json
+          sources_found?: number | null
+        }
+        Update: {
+          ai_analysis?: string
+          article_id?: string | null
+          created_at?: string
+          id?: string
+          original_content?: string
+          processing_time?: number | null
+          research_data?: Json
+          sources_found?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_analyses_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sources: {
+        Row: {
+          article_id: string | null
+          created_at: string
+          credibility_score: number | null
+          description: string | null
+          id: string
+          source_type: string | null
+          title: string
+          url: string
+        }
+        Insert: {
+          article_id?: string | null
+          created_at?: string
+          credibility_score?: number | null
+          description?: string | null
+          id?: string
+          source_type?: string | null
+          title: string
+          url: string
+        }
+        Update: {
+          article_id?: string | null
+          created_at?: string
+          credibility_score?: number | null
+          description?: string | null
+          id?: string
+          source_type?: string | null
+          title?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sources_article_id_fkey"
+            columns: ["article_id"]
+            isOneToOne: false
+            referencedRelation: "articles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_unique_slug: {
+        Args: { title_text: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
