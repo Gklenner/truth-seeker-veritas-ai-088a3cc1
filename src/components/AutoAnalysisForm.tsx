@@ -19,7 +19,7 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
 
   const analysisMutation = useMutation({
     mutationFn: async (content: string) => {
-      const response = await fetch('/functions/v1/deep-research', {
+      const response = await fetch('/functions/v1/free-analysis', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
       onAnalysisComplete?.(data);
       toast({
         title: "Análise concluída!",
-        description: "Deep research realizada com sucesso",
+        description: "Verificação gratuita realizada com sucesso",
       });
     },
     onError: (error: any) => {
@@ -69,12 +69,12 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Zap className="w-5 h-5 text-accent" />
-            Análise Automática com IA
+            Análise Gratuita com IA
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Textarea
-            placeholder="Cole aqui o texto, link ou alegação que deseja verificar automaticamente..."
+            placeholder="Cole aqui o texto, link ou alegação que deseja verificar gratuitamente..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
             className="min-h-[120px]"
@@ -82,8 +82,8 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
           
           <div className="flex items-center justify-between">
             <div className="flex gap-2">
-              <Badge variant="outline">Deep Research</Badge>
-              <Badge variant="outline">Multi-Source</Badge>
+              <Badge variant="outline">100% Gratuito</Badge>
+              <Badge variant="outline">Sem API Keys</Badge>
               <Badge variant="outline">AI Powered</Badge>
             </div>
             
@@ -97,7 +97,7 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
               ) : (
                 <Zap className="w-4 h-4" />
               )}
-              {analysisMutation.isPending ? "Analisando..." : "Analisar Automaticamente"}
+              {analysisMutation.isPending ? "Analisando..." : "Analisar Gratuitamente"}
             </Button>
           </div>
         </CardContent>
@@ -108,7 +108,7 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-accent">
               <CheckCircle className="w-5 h-5" />
-              Resultado da Análise Automática
+              Resultado da Análise Gratuita
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -143,7 +143,7 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
                   {analysisResult.sources?.length || 0}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Fontes Encontradas
+                  Fontes Sugeridas
                 </div>
               </div>
             </div>
@@ -151,14 +151,14 @@ const AutoAnalysisForm = ({ onAnalysisComplete }: AutoAnalysisFormProps) => {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold text-white mb-2">Análise da IA:</h4>
-                <p className="text-gray-300 text-sm">
+                <p className="text-gray-300 text-sm whitespace-pre-line">
                   {analysisResult.analysis}
                 </p>
               </div>
 
               {analysisResult.sources && analysisResult.sources.length > 0 && (
                 <div>
-                  <h4 className="font-semibold text-white mb-2">Fontes Consultadas:</h4>
+                  <h4 className="font-semibold text-white mb-2">Fontes Recomendadas para Verificação:</h4>
                   <div className="space-y-2">
                     {analysisResult.sources.map((source: any, index: number) => (
                       <div key={index} className="flex items-center justify-between bg-muted/10 p-3 rounded">
